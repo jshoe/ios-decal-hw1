@@ -86,7 +86,7 @@ class Foo {
     }
 }
 
-//: The problem with this method is that the 'countLetters' dictionary was not initialized correctly and should have been 'var countLetters = [Character : Int]() as shown above. This initializes the empty dictionary correctly for the function to use later on. Also, you can change the 'return nil' at the end to 'return true' since wordA and wordB would definitely be anagrams at that point.
+//: One of the problems with the function declaration is that it was not preceded by "class", so Swift was trying to call it with the object itself as an argument. Adding "class" fixes this behavior. Another problem with this method is that the 'countLetters' dictionary was not initialized correctly and should have been 'var countLetters = [Character : Int]() as shown above. This initializes the empty dictionary correctly for the function to use later on. Also, you can change the 'return nil' at the end to 'return true' since wordA and wordB would definitely be anagrams at that point.
 
 
 //: **Do not** change anything below.
