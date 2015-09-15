@@ -15,39 +15,40 @@ class Foo {
     var wordB : String!
     
     init (words: [String?]) {
-        wordA = words[0]?
-        wordB = words[1]?
+        wordA = words[0]!
+        wordB = words[1]!
     }
     
-//: [EXPLAIN YOUR ANSWER TO Q1 HERE]
+//: This isn't the correct way to unwrap optionals because you should use ! instead of ?. In the above lines the String value was already forced with 'String!' so you know the variables definitely hold String values.
     
 
     
 //: ## Q2: Variable Types and Function Types
 //: Why does the compiler dislike the for loop? Also, what should we return?
     
-    func arePalindromes(words: [String]) -> Bool! {
+    class func arePalindromes(words: [String]) -> Bool! {
         let reversedWords = words.map() {String($0.characters.reverse())}
         var numElements = words.count
         
-        for let i = 0; i < numElements; i++ {
+        var i = 0;
+        for i; i < numElements; i++ {
             if words[i] != reversedWords[i] {
                 return false
             }
         }
         
-        return nil
+        return true
     }
     
-//: [EXPLAIN YOUR ANSWER TO Q2 HERE]
+//: The compiler dislikes this for loop because "let i" means that 'i' is a constant and not mutable as a loop index variable. You could declare "var i = 0;" in the line above the loop. The result that the loop should return is 'true' instead of 'nil' past the 'for' loop because all the words would be palindromes. The result of the function calls at the bottom are 'true' for 'palindromes' and 'false' for 'notPalindromes'.
     
     
     
 //: ## Q3: More functions, and object initialization
 //: The method should be returning true or false -- what's wrong?
 //: Are we initializing the dictionary correctly?
-    func isAnagram(wordA: String, wordB: String) -> Bool? {
-        var countLetters : [Character : Int]
+    class func isAnagram(wordA: String, wordB: String) -> Bool? {
+        var countLetters = [Character : Int]()
         var lenA = wordA.characters.count
         var lenB = wordB.characters.count
         
@@ -81,11 +82,11 @@ class Foo {
             }
         }
         
-        return nil
+        return true
     }
 }
 
-//: [EXPLAIN YOUR ANSWER TO Q3 HERE]
+//: The problem with this method is that the 'countLetters' dictionary was not initialized correctly and should have been 'var countLetters = [Character : Int]() as shown above. This initializes the empty dictionary correctly for the function to use later on. Also, you can change the 'return nil' at the end to 'return true' since wordA and wordB would definitely be anagrams at that point.
 
 
 //: **Do not** change anything below.
